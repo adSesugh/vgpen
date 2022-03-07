@@ -15,6 +15,28 @@ Route::get('/', function () {
     return redirect()->route('login');
 });
 
+Route::get('/testdb', function(){
+    $host = "197.156.253.59";
+    $user = "IT";
+    $password = "Zone459.";
+    $dbname="PFA";
+    $options = [
+        PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
+        PDO::ATTR_CASE => PDO::CASE_NATURAL,
+        PDO::ATTR_ORACLE_NULLS => PDO::NULL_EMPTY_STRING
+    ];
+
+    try {
+        $connection = new PDO("sqlsrv:Server=$host,1433; Database=$dbname", $user, $password);
+
+
+    } catch(PDOException $e) {
+        die("Database connection failed: " . $e->getMessage());
+        exit;
+    }
+    echo"Connection Successful";
+});
+
 Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'role:admin']], function () {
     Route::resource('/teams', TeamsController::class);
     Route::resource('/users', UsersController::class);
