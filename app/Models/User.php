@@ -20,7 +20,7 @@ class User extends Authenticatable
     use LaratrustUserTrait;
     use HasApiTokens, HasFactory, Notifiable;
 
-    //protected $connection = 'sqlsrv';
+    protected $connection = 'sqlsrv';
 
     protected $casts = [
         'email_verified_at' => 'datetime',
