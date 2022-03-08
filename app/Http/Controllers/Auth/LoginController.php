@@ -42,7 +42,7 @@ class LoginController extends Controller
             $login_type => $request->input('login')
         ]);
 
-        $userCheck = DB::connection('mysql')->table('mktusers')->where('email', $request->input('login'))->orWhere('staffId', $request->input('login'))->exists();
+        $userCheck = DB::connection('sqlsrv')->table('mktusers')->where('email', $request->input('login'))->orWhere('staffId', $request->input('login'))->exists();
 
         if(!$userCheck) {
             return redirect()->back()
